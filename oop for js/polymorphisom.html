@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Payment Gateway</title>
+    <style>
+        /* Basic styling for better readability */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #amountDiv {
+            display: none; /* Initially hide the amount input */
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        #amountDiv label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        #amount {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 150px; /* Adjust width as needed */
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h3 {
+            margin-top: 20px;
+            color: #333;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form id="paymentForm">
+        <h3>Select Payment Method:</h3>
+        <label>
+            <input type="radio" name="paymentMethod" value="cash" onclick="showInputAmount()"> Cash
+        </label><br>
+
+        <label>
+            <input type="radio" name="paymentMethod" value="creditCard" onclick="showInputAmount()"> Credit Card
+        </label><br>
+
+        <label>
+            <input type="radio" name="paymentMethod" value="payPal" onclick="showInputAmount()"> PayPal
+        </label><br>
+
+        <div id="amountDiv" class="amount-input">
+            <label for="amount">Enter Amount:</label>
+            <input type="number" name="amount" id="amount" placeholder="Enter Amount" min="0.01" step="0.01">
+
+            <button type="button" onclick="processPayment()">Submit Payment</button>
+        </div>
+    </form>
+    <h3 id="output"></h3>
+
+    <script>
+        // Base Payment class
+        class Payment {
+            constructor(amount) {
+                // Ensure amount is a number and positive
+                this.amount = parseFloat(amount);
+                if (isNaN(this.amount) || this.amount <= 0) {
+                    throw new Error("Invalid amount. Please enter a positive number.");
+                }
+            }
+
+            pay() {
+                return `Paid ${this.amount.toFixed(2)} using a generic method.`;
+            }
+        }
+
+        // Concrete Cash Payment class
+        class CashPayment extends Payment {
+            pay() {
+                return `<span class="success">Successfully paid ${this.amount.toFixed(2)} via Cash.</span>`;
+            }
+        }
+
+        // Concrete Credit Card Payment class
+        class CreditCard extends Payment {
+            pay() {
+                // In a real application, you'd integrate with a third-party SDK here (e.g., Stripe)
+                // For this example, we'll simulate a successful payment.
+                return `<span class="success">Successfully paid ${this.amount.toFixed(2)} via Credit Card.</span>`;
+            }
+        }
+
+        // Concrete PayPal Payment class
+        class PayPal extends Payment {
+            pay() {
+                // In a real application, you'd integrate with PayPal's SDK here
+                // For this example, we'll simulate a successful payment.
+                return `<span class="success">Successfully paid ${this.amount.toFixed(2)} via PayPal.</span>`;
+            }
+        }
+
+        // Function to show the amount input section
+        function showInputAmount() {
+            document.getElementById('amountDiv').style.display = 'block';
+            // Clear previous output when a new method is selected
+            document.getElementById('output').innerHTML = '';
+            document.getElementById('amount').value = ''; // Clear amount field
+        }
+
+        // Function to process the payment
+        function processPayment() {
+            const outputElement = document.getElementById('output');
+            outputElement.innerHTML = ''; // Clear previous output
+
+            // Get the selected payment method
+            let selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+            if (!selectedMethod) {
+                outputElement.innerHTML = '<span class="error">Please select a payment method.</span>';
+                return;
+            }
+
+            // Get the amount entered
+            let amount = document.getElementById("amount").value;
+
+            // Validate amount
+            if (amount === "" || parseFloat(amount) <= 0) {
+                outputElement.innerHTML = '<span class="error">Please enter a valid amount.</span>';
+                return;
+            }
+
+            let paymentInstance;
+            try {
+                switch (selectedMethod.value) {
+                    case 'cash':
+                        paymentInstance = new CashPayment(amount);
+                        break;
+                    case 'creditCard':
+                        paymentInstance = new CreditCard(amount);
+                        break;
+                    case 'payPal':
+                        paymentInstance = new PayPal(amount);
+                        break;
+                    default:
+                        // This case should ideally not be reached if radio buttons are properly set
+                        paymentInstance = new Payment(amount);
+                        break;
+                }
+                outputElement.innerHTML = paymentInstance.pay();
+            } catch (error) {
+                outputElement.innerHTML = `<span class="error">${error.message}</span>`;
+            }
+        }
+
+        // Initially hide the amount input div
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('amountDiv').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

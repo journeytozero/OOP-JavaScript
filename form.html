@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Form</title>
+    <style>
+        #resultSection
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        function myFunction()
+        {
+            let unitPrice = parseFloat(document.myform.unitPrice.value) || 0;
+
+            let quantity = parseFloat(document.myform.qty.value) || 0;
+            
+            let discount = parseFloat(document.myform.discount.value) || 0;
+
+            let vat = parseFloat(document.myform.vat.value) || 0;
+
+            let totalprice = unitPrice * quantity;
+            let dis_ama = totalprice * (discount/100);
+
+            let vat_amount = totalprice * (vat/100);
+            let neat_toatl = totalprice + vat_amount + dis_ama;
+
+            document.getElementById("totalpric").innerHTML=totalprice
+            document.getElementById("qant").innerHTML=quantity
+            document.getElementById("disco").innerHTML=dis_ama
+            document.getElementById("vt").innerHTML=vat_amount
+            document.getElementById("netamount").innerHTML=neat_toatl
+            
+        }
+    </script>
+
+
+    <form action="" name="myform">
+        <label for="">Unit Price</label><br>
+        <input type="number"name="unitPrice" id="unitPrice" ><br><br>
+
+        <label for="">Quantity</label><br>
+        <input type="number" name="qty" id="qty"  ><br><br>
+
+        <label for="discount">Discount: (%)</label><br>
+        <input type="number" name="discount" id="discount"  ><br><br>
+
+        <label for="vat">VAT(%):</label><br>
+        <input type="number" name="vat" value="" id="vat"><br><br>
+        
+        <label for="">Discount Card</label><br>
+        <textarea name="disCard" rows="3" cols="22" id="disCard"></textarea><br><br>
+
+    
+        <div id="resultSection">
+            <label for="">Total Price: </label>
+        <span id="totalpric">0.00</span><br>
+
+        <label for="">Quantity: </label>
+        <span id="qant">0.00</span><br>
+
+        <label for="">Discount: </label>
+        <span id="disco">0.00</span><br>
+
+        <label for="">VAT: </label>
+        <span id="vt">0.00</span><br>
+
+        <label for="">Net Amount: </label>
+        <span id="netamount">0.00</span><br>
+        </div>
+        
+
+    </form>
+</body>
+</html>

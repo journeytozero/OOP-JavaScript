@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script>
+        
+        function myname()
+        {
+            var a = 10;
+            var b = 15;
+            var c = a+b;
+            alert(c);
+        }
+        myname();
+    </script> -->
+    <!-- <div id="mytotal">
+
+</div>
+    <script>
+        function total()
+        {
+            var a =parseInt(prompt("Enter Your first Number:") );
+            var b = parseInt(prompt("Enter Your Second Number: "))
+            var sum = a+b;
+
+           document.getElementById('#mytotal').innerHTML = sum;
+        }
+        total();
+    </script> -->
+
+    <!-- <script>
+        var glo = 1000;
+
+        function a() {
+            //var glo = 200;
+            if (glo == 1000) {
+                glo = "Good";
+            }
+            document.write(glo);
+        }
+
+        function b() {
+            var abc = 200;
+            document.write(glo+"\n");
+        }
+        a();
+        b();
+        a();
+        b();
+        
+        function multi()
+        {
+            let a = parseInt(prompt("Enter a"));
+            let b = parseInt(prompt("Enter B"));
+
+            let m = a * b;
+            document.write(m);
+        }
+        multi();
+    </script> -->
+
+    <!-- <script>
+        let a = 100;
+        let b = 20;
+
+        (a>b)?alert("A is large Number"):alert("B is large Number");
+
+        let numbr = parseInt(prompt("Enter Your Number: "))
+
+        let res = (numbr < 40)? "Unsatisfactory":(numbr < 60)?"Good":(numbr< 80)?"Very Good":"Excellent";
+
+        document.write(res);
+    </script> -->
+
+    <!-- <script>
+        var a = (x,y) => x*y;
+        alert(a(10,3));
+        var nu = 20;
+
+        var check = (nu >=10) ? ()=>alert("Num is larde"):()=>alert("Num is small");
+        check();
+    </script> -->
+
+    <h1>Billing Statement</h1>
+
+    <div id="output">
+        
+    </div>
+
+    <div id ="notpt">
+
+    </div>
+
+    <script>
+        let productname = "Smart Phone";
+        let productpric = 15000;
+        let quantity = 2;
+        let vat = 10;
+
+        function product(price,qty)
+        {
+            let total = price * qty;
+
+            function addVat(vatRate)
+            {
+                let vatAmount = (total * vatRate) / 100;
+                return total + vatAmount;
+            }
+
+            return addVat(vat);
+        }
+
+        let finalamount = product(productpric,quantity);
+        document.getElementById('output').innerHTML = `<p><b>Product: </b>${productname}</p>
+        <p><b>Product Price: </b>${productpric}</p>
+        <p><b>Quantity: </b>${quantity}</p>
+        <p><b>VAT: </b>${vat}<hr></p>
+        <p><b>Total Amount: </b>${finalamount.toFixed(2)} BDT<hr><hr></p>
+        `
+
+    </script>
+    <script>
+        let productnme = "Techno Phone";
+        let produtpric = 18000;
+        let quantty = 20;
+        let vaT = 15;
+
+        var productPrice = (productp,qtty) =>
+    {
+        var totoprice = productp * qtty; 
+        var vatamountt = (vatratee) =>{
+            let tovat = (totoprice * vatratee)/100;
+
+            return totoprice + tovat;
+        }
+
+        return vatamountt(vaT);
+    }
+
+    let fialamount = product(produtpric,quantty);
+        document.getElementById('notpt').innerHTML = `<p><b>Product: </b>${productnme}</p>
+        <p><b>Product Price: </b>${produtpric}</p>
+        <p><b>Quantity: </b>${quantty}</p>
+        <p><b>VAT: </b>${vaT}%</p><hr>
+        <p><b>Total Amount: </b>${fialamount.toFixed(2)} BDT</p>
+        `
+
+    </script>
+</body>
+
+</html>

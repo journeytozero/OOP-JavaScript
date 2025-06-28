@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const student = {
+            name: 'Habiba',
+            details: {
+                age: 22,
+                major: 'Compute Science and Technology'
+            },
+            address: {
+                city: 'Sylhet',
+                zip: '1205'
+            }
+        };
+
+        let { name, details: { age, major }, address: { city } } = student
+
+        console.log(name);    // শোভা
+        console.log(age);     // 22
+        console.log(major);   // কম্পিউটার সায়েন্স
+        console.log(city);    // ঢাকা
+        
+        let arr1 = [10,20,30];
+        let copy = [...arr1];
+
+        copy.push(40);
+        console.log(copy);
+
+    </script>
+</body>
+
+</html>

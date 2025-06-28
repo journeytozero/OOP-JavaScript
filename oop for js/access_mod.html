@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class User {
+            #password;
+            #otp;
+            constructor(username, email, password,otp) {
+                this.username = username;
+                this.email = email;
+                this.#password = password;
+                this.#otp = otp;
+
+            }
+
+            login(username, password,otp) {
+                if (username == this.username && password == this.#password ) {
+                    console.log("Log in Successfull");
+                }
+
+                else {
+                    console.log("Log in ATE");
+                }
+            }
+
+
+            register() {
+                console.log(this.username + "Is now registerde");
+            }
+
+            setPassword(newPassword) {
+                this.password = newPassword;
+            }
+
+        }
+
+        let john = new User("John", "john@gmail.com", "123456");
+        john.register();
+        john.setPassword("111111");
+        john.login("John", "111111");
+        document.write(john.#password);
+
+        // class Member extends User
+        // {
+        //     constructor(username,email,password)
+        // }
+    </script>
+</body>
+
+</html>

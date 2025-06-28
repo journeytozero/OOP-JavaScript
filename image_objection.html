@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="result">
+
+    </div>
+
+    <button type="button" class="btn">See Notice</button>
+    <h4>***Click the button above to load the notice***</h4>
+
+    <script>
+        var resEle = document.querySelector(".result");
+        var btnEle = document.querySelector(".btn");
+
+        var newImage = new Image();
+        newImage.src = "img/third-world-skeptical-kid-meme-template-regular-39c477d4.webp";
+
+        btnEle.addEventListener('click',()=>{
+            resEle.appendChild(newImage);
+        })
+    </script>
+</body>
+</html>
